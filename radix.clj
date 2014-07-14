@@ -3,16 +3,18 @@
 (def printable-ascii
   (map char (range (int \!) 127)))
 
+(defn logarithm [num base]
+  (/ (Math/log num) (Math/log base)))
+
 (defn to-radix [number alphabet]
   (let [base (count alphabet)
-        log #(/ (Math/log %1) (Math/log %2))
-        digits (if (= number 0)
-                 1
-                 (int (+ 1 (Math/floor (log number base)))))]
+        num-digits (if (= number 0)
+                     1
+                     (-> number (logarithm base) Math/floor int inc))]
     (reverse
-      (for [i (range digits)
-            :let [r (/ number (Math/pow base i))
-                  digit (mod r base)]]
+      (for [i (range num-digits)
+            :let [n (/ number (Math/pow base i))
+                  digit (mod n base)]]
         (nth alphabet digit)))))
 
 (defn from-radix [encoded alphabet]
@@ -30,7 +32,7 @@
                 (lookup val))))
         0))))
 
-;; To test it in Clojure, run `lein repl` and then `(use 'radix)`
+;; To test it in Clojure, run `lein repl`, then `(use 'radix)`, then try the examples:
 
 (to-radix 1 (range 10))
 ; => (1)
@@ -50,8 +52,8 @@
 (from-radix "\"!" printable-ascii)
 ; => 94
 
-(map #(from-radix % printable-ascii) ["!", "\"", "\"!", "\"!!"])
-; => (0 1 94 8836)
+(map #(from-radix % printable-ascii) ["!", "\"", "\"!", "\"!!", "M-[I"])
+; => (0 1 94 8836 36657220)
 
 (* 94 94)
 ; => 8836
