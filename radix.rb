@@ -5,18 +5,18 @@ def logarithm(num, base)
 end
 
 def to_radix(number, alphabet)
-	base = alphabet.size
-	num_digits = if number == 0
-		1
-	else
-		logarithm(number, base).floor + 1
-	end
+  base = alphabet.size
+  num_digits = if number == 0
+    1
+  else
+    logarithm(number, base).floor + 1
+  end
 
-	(0...num_digits).map do |i|
-		n = number / (base ** i)
-		digit = n % base
-		alphabet[digit]
-	end.reverse
+  (0...num_digits).map do |i|
+    n = number / (base ** i)
+    digit = n % base
+    alphabet[digit]
+  end.reverse
 end
 
 def from_radix(encoded, alphabet)
