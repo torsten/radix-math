@@ -1,4 +1,12 @@
-(ns radix)
+;; Copyright (c) Torsten Becker, 2014. All rights reserved.  The use
+;; and distribution terms for this software are covered by the Eclipse
+;; Public License 1.0 (http://www.eclipse.org/legal/epl-v10.html)
+;; which can be found in the file epl.html at the root of this
+;; distribution.  By using this software in any fashion, you are
+;; agreeing to be bound by the terms of this license.
+;; You must not remove this notice, or any other, from this software.
+
+(ns radix-math)
 
 (def printable-ascii
   (map char (range (int \!) 127)))
@@ -31,29 +39,3 @@
              (* (int (Math/pow base i))
                 (lookup val))))
         0))))
-
-;; To test it in Clojure, run `lein repl`, then `(use 'radix)`, then try the examples:
-
-(to-radix 1 (range 10))
-; => (1)
-
-(to-radix 99 (range 10))
-; => (9 9)
-
-(apply str (to-radix 36657220 printable-ascii))
-; => "M-[I"
-
-(apply str (to-radix 0 printable-ascii))
-; => "!"
-
-(from-radix [1 2 3] (range 10))
-; => 123
-
-(from-radix "\"!" printable-ascii)
-; => 94
-
-(map #(from-radix % printable-ascii) ["!", "\"", "\"!", "\"!!", "M-[I"])
-; => (0 1 94 8836 36657220)
-
-(* 94 94)
-; => 8836
