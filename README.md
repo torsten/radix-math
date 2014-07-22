@@ -33,21 +33,25 @@ radix-math is released via [Clojars](https://clojars.org/radix-math). The Latest
 (radix/to-radix 95 (range 10))
 ; => (9 5)
 
-;; Using all printable ASCII chars:
+;; To convert to hex, lets first define all available digits:
+(def hex (map #(.charAt (format "%x" %) 0) (range 16)))
+
+(apply str (radix/to-radix 255 hex))
+; => "ff"
+
+;; Using all printable ASCII characters as digits:
 (apply str (radix/to-radix 480203 radix/printable-ascii))
 ; => "WAT"
 
-(apply str (radix/to-radix 0 radix/printable-ascii))
-; => "!"
-
+;; Converting back from sequences:
 (radix/from-radix [1 2 3] (range 10))
 ; => 123
 
+(radix/from-radix "ff" hex)
+; => 255
+
 (radix/from-radix "\"!" radix/printable-ascii)
 ; => 94
-
-(map #(radix/from-radix % radix/printable-ascii) ["!", "\"", "\"!", "\"!!", "WAT"])
-; => (0 1 94 8836 480203)
 ```
 
 
