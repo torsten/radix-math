@@ -1,12 +1,12 @@
 
 
-# Radix Math
+# Clojure Radix Math
 
 This library provides utilities to convert integers to arbitrary radix representations with custom "letter alphabets".
 
-Likewise strings can be easily decoded back into a integer representation.
+Likewise, strings can be easily decoded back into a integer representation.
 
-While Java has a limit of base (or "radix") 36, this library is generic and can handle arbitrary bases.
+While Java has a limit of base (or "radix") 36, this library is generic and can handle arbitrary bases. [See the usage section for examples](#usage).
 
 
 ## Releases and Dependency Information
