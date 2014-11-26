@@ -44,14 +44,14 @@ radix-math is released via [Clojars](https://clojars.org/radix-math). The Latest
 ; => "WAT"
 
 ;; Converting back from sequences:
-(radix/from-radix [1 2 3] (range 10))
-; => 123
+(radix/from-radix [9, 5] (range 10))
+; => 95
 
 (radix/from-radix "ff" hex)
 ; => 255
 
-(radix/from-radix "\"!" radix/printable-ascii)
-; => 94
+(radix/from-radix "WAT" radix/printable-ascii)
+; => 480203
 ```
 
 
